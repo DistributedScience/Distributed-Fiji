@@ -112,10 +112,6 @@ def generate_task_definition(AWS_PROFILE):
             "value": NECESSARY_STRING
         },
         {
-            "name": "DOWNLOAD_FILES",
-            "value": DOWNLOAD_FILES
-        },
-        {
 	    "name": "SCRIPT_DOWNLOAD_URL",
 	    "value": SCRIPT_DOWNLOAD_URL
         }
