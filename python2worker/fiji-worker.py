@@ -36,8 +36,6 @@ else:
 SCRIPT_DOWNLOAD_URL = os.environ['SCRIPT_DOWNLOAD_URL']
 SCRIPT_NAME = os.path.split(SCRIPT_DOWNLOAD_URL)[1]
 
-localIn = '/home/ubuntu/local_input'
-
 
 #################################
 # CLASS TO HANDLE THE SQS QUEUE
