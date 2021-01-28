@@ -30,7 +30,7 @@ TASK_DEFINITION = {
                 ],
             "name": APP_NAME,
             "image": DOCKERHUB_TAG,
-            "cpu": CPU_SHARES,
+            "cpu": 1024,
             "memory": MEMORY,
             "essential": True,
             "privileged": True,
@@ -92,16 +92,8 @@ def generate_task_definition(AWS_PROFILE):
             "value": AWS_BUCKET
         },
         {
-            "name": "DOCKER_CORES",
-            "value": str(DOCKER_CORES)
-        },
-        {
             "name": "LOG_GROUP_NAME",
             "value": LOG_GROUP_NAME
-        },
-        {
-            "name": "CHECK_IF_DONE_BOOL",
-            "value": CHECK_IF_DONE_BOOL
         },
         {
             "name": "EXPECTED_NUMBER_FILES",
@@ -112,16 +104,8 @@ def generate_task_definition(AWS_PROFILE):
             "value": ECS_CLUSTER
         },
         {
-            "name": "SECONDS_TO_START",
-            "value": str(SECONDS_TO_START)
-        },
-        {
             "name": "MIN_FILE_SIZE_BYTES",
             "value": str(MIN_FILE_SIZE_BYTES)
-        },
-        {
-            "name": "USE_PLUGINS",
-            "value": str(USE_PLUGINS)
         },
         {
             "name": "NECESSARY_STRING",
@@ -130,7 +114,11 @@ def generate_task_definition(AWS_PROFILE):
         {
             "name": "DOWNLOAD_FILES",
             "value": DOWNLOAD_FILES
-        }        
+        },
+        {
+	    "name": "SCRIPT_DOWNLOAD_URL",
+	    "value": SCRIPT_DOWNLOAD_URL
+        }
     ]
     return task_definition
 
@@ -358,14 +346,9 @@ def submitJob():
 
     # Step 1: Read the job configuration file
     jobInfo = loadConfig(sys.argv[2])
-    if 'output_structure' not in jobInfo.keys(): #backwards compatibility for 1.0.0
-        jobInfo["output_structure"]=''
     templateMessage = {'Metadata': '', 
-        'pipeline': jobInfo["pipeline"],
-        'output': jobInfo["output"],
-        'input': jobInfo["input"],
-        'data_file': jobInfo["data_file"],
-        'output_structure':jobInfo["output_structure"]
+		'output_file_location': jobInfo["output_file_location"],
+		'shared_metadata': jobInfo["shared_metadata"]
         }
 
     # Step 2: Reach the queue and schedule tasks
@@ -373,11 +356,7 @@ def submitJob():
     queue = JobQueue()
     print('Scheduling tasks')
     for batch in jobInfo["groups"]:
-        #support Metadata passed as either a single string or as a list
-        try: #single string ('canonical' DCP)
-            templateMessage["Metadata"] = batch["Metadata"]
-        except KeyError: #list of parameters (cellprofiler --print-groups)
-            templateMessage["Metadata"] = batch
+        templateMessage["Metadata"] = batch
         queue.scheduleBatch(templateMessage)
     print('Job submitted. Check your queue')
 
