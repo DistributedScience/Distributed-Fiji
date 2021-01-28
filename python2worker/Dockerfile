@@ -1,12 +1,14 @@
 #
-#                                 - [ BROAD'16 ] -
+#                                 - [ BROAD'21 ] -
 #
 # A docker instance for accessing AWS resources
-# This wraps the cellprofiler docker registry
+# This wraps the Fiji docker registry
 #
 
 
-FROM cellprofiler/cellprofiler:3.1.9
+FROM fiji/fiji:fiji-openjdk-8
+
+USER root
 
 # Install S3FS 
 
@@ -35,6 +37,9 @@ RUN make install
 
 # Install AWS CLI
 
+RUN apt-get -y upgrade python2.7
+RUN apt-get -y install python-pip
+
 RUN \
   pip install awscli 
 
@@ -54,17 +59,11 @@ RUN pip install pandas==0.24.2
 
 # SETUP NEW ENTRYPOINT
 
-RUN mkdir -p /home/ubuntu/
-WORKDIR /home/ubuntu
-COPY cp-worker.py .
+WORKDIR /opt/fiji
+COPY fiji-worker.py .
 COPY instance-monitor.py .
 COPY run-worker.sh .
 RUN chmod 755 run-worker.sh
 
-RUN git clone https://github.com/CellProfiler/CellProfiler-plugins.git
-WORKDIR /home/ubuntu/CellProfiler-plugins
-#RUN pip install -r requirements.txt
-
-WORKDIR /home/ubuntu
 ENTRYPOINT ["./run-worker.sh"]
 CMD [""]
