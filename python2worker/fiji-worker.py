@@ -29,10 +29,6 @@ if 'NECESSARY_STRING' not in os.environ:
     NECESSARY_STRING = False
 else:
     NECESSARY_STRING = os.environ['NECESSARY_STRING']
-if 'DOWNLOAD_FILES' not in os.environ:
-    DOWNLOAD_FILES = False
-else:
-    DOWNLOAD_FILES = os.environ['DOWNLOAD_FILES']
 SCRIPT_DOWNLOAD_URL = os.environ['SCRIPT_DOWNLOAD_URL']
 SCRIPT_NAME = os.path.split(SCRIPT_DOWNLOAD_URL)[1]
 
