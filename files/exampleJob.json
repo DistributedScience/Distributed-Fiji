@@ -1,14 +1,13 @@
 {
-  "_comment1": "Paths in this file are relative to the root of your S3 bucket",
-  "pipeline": "projects/analysis.cppipe", 
-  "data_file": "projects/list_of_images.csv", 
-  "input": "projects/input/",
-  "output": "projects/output/",
-  "output_structure": "Metadata_Plate-Metadata_Well-Metadata_Site",
-  "_comment2": "The following groups are tasks, and each will be run in parallel",
+  "_comment1": "Path of the output_file_location is relative to the root of your S3 bucket",
+  "output_file_location": "projects/output/",
+  "_comment2a": "If the location of input data is on your bucket and is passed to the script, make sure",
+  "_comment2b": "you pass a file location starting with /home/ubuntu/bucket",
+  "shared_metadata": {"input_file_location":"/home/ubuntu/bucket/projects/input","image_size":"1024","rows":"2","columns":"2"},
+  "_comment3": "The following groups are tasks, and each will be run in parallel",
   "groups": [
-    {"Metadata": "Metadata_Plate=Plate1,Metadata_Well=A01,Metadata_Site=1"},
-    {"Metadata": "Metadata_Plate=Plate1,Metadata_Well=A01,Metadata_Site=2"}
+    {"Well": "A1", "Plate":"Plate_1"},
+    {"Well": "A2", "Plate":"Plate_1"}
   ]
 }
 
