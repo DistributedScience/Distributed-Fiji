@@ -1,7 +1,7 @@
-# Distributed-CellProfiler
-Run encapsulated docker containers with CellProfiler in the Amazon Web Services infrastructure.
+# Distributed-FIJI
+Run encapsulated docker containers with FIJI in the Amazon Web Services infrastructure.
 
-This code is an example of how to use AWS distributed infrastructure for running CellProfiler.
+This code is an example of how to use AWS distributed infrastructure for running FIJI.
 The configuration of the AWS resources is done using fabric. The worker is written in Python 
 and is encapsulated in a docker container. There are four AWS components that are needed to run 
 distributed jobs:
@@ -41,8 +41,7 @@ following commands:
 Running either script uploads the tasks that are configured in the json file. This assumes that your 
 data is stored in S3, and the json file has the paths to find input and output directories. You have to 
 customizethe exampleJob.json file or the run_batch_general file with paths that make sense for your project. 
-The tasks that composeyour job are CP groups, and each one will be run in parallel. You need to define each 
-task in your input file to guide the parallelization.
+Each job will be run in parallel - you define each task in your input file to guide the parallelization.
 
 ### Step 3
 After submitting the job to the queue, we can add computing power to process all tasks in AWS. This
