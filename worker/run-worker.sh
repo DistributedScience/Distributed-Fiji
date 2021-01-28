@@ -27,14 +27,13 @@ stdbuf -o0 s3fs $AWS_BUCKET /home/ubuntu/bucket -o passwd_file=/credentials.txt
 # 3. SET UP ALARMS
 aws cloudwatch put-metric-alarm --alarm-name ${APP_NAME}_${MY_INSTANCE_ID} --alarm-actions arn:aws:swf:${AWS_REGION}:${OWNER_ID}:action/actions/AWS_EC2.InstanceId.Terminate/1.0 --statistic Maximum --period 60 --threshold 1 --comparison-operator LessThanThreshold --metric-name CPUUtilization --namespace AWS/EC2 --evaluation-periods 15 --dimensions "Name=InstanceId,Value=${MY_INSTANCE_ID}" 
 
-# 4. RUN VM STAT MONITOR
+# 4. DOWNLOAD PLUGIN FILE
+wget -P /opt/fiji/Fiji.app/plugins/ $SCRIPT_DOWNLOAD_URL
+
+# 5. RUN VM STAT MONITOR
 
 python3 instance-monitor.py &
 
-# 5. RUN CP WORKERS
-for((k=0; k<$DOCKER_CORES; k++)); do
-    python3 cp-worker.py |& tee $k.out &
-    sleep $SECONDS_TO_START
-done
-wait
-
+# 6. RUN CP WORKERS
+RUN FIJI WORKER
+python3 fiji-worker.py |& tee $k.out  
