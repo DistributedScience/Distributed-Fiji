@@ -1,6 +1,6 @@
 user = cellprofiler
-project = distributed-cellprofiler
-tag = 2.0.0_4.0.6
+project = distributed-fiji
+tag = latest
 
 .DEFAULT_GOAL: build
 build:
