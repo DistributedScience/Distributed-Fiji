@@ -12,8 +12,8 @@ distributed jobs:
 4. A spot fleet of EC2 instances
 
 All of them can be managed through the AWS Management Console. However, this code helps to get
-started quickly and run a job autonomously if all the configuration is correct. The code includes 
-a fabric script that links all these components and prepares the infrastructure to run a distributed 
+started quickly and run a job autonomously if all the configuration is correct. The code runs a
+script that links all these components and prepares the infrastructure to run a distributed 
 job. When the job is completed, the code is also able to stop resources and clean up components. 
 
 ## Running the code
@@ -29,18 +29,13 @@ and you can modify the worker code to build your own. Anytime you modify the wor
 to update the docker registry using the Makefile script inside the worker directory.
 
 ### Step 2
-After the first script runs successfully, the job can now be submitted to AWS using EITHER of the 
-following commands:
+After the first script runs successfully, the job can now be submitted to AWS using the following command:
 
  $ python run.py submitJob files/exampleJob.json
  
- OR
- 
- $ python run_batch_general.py
-
-Running either script uploads the tasks that are configured in the json file. This assumes that your 
+Running the script uploads the tasks that are configured in the json file. This assumes that your 
 data is stored in S3, and the json file has the paths to find input and output directories. You have to 
-customizethe exampleJob.json file or the run_batch_general file with paths that make sense for your project. 
+customize the exampleJob.json file or the run_batch_general file with paths that make sense for your project. 
 Each job will be run in parallel - you define each task in your input file to guide the parallelization.
 
 ### Step 3
