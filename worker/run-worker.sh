@@ -34,6 +34,5 @@ wget -P /opt/fiji/Fiji.app/plugins/ $SCRIPT_DOWNLOAD_URL
 
 python3 instance-monitor.py &
 
-# 6. RUN CP WORKERS
-RUN FIJI WORKER
+# 6. RUN FIJI WORKER
 python3 fiji-worker.py |& tee $k.out  
