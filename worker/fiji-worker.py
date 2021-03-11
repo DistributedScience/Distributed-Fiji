@@ -129,6 +129,8 @@ def runFiji(message):
                 cmd = 'aws s3 mv ' + localOut + ' s3://' + AWS_BUCKET + '/' + remoteOut + ' --recursive'
                 subp = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 out,err = subp.communicate()
+                out=out.decode()
+                err=err.decode()
                 printandlog('== OUT \n'+out, logger)
                 if err == '':
                     break
