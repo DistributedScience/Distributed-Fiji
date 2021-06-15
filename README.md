@@ -2,7 +2,7 @@
 Run encapsulated docker containers with FIJI in the Amazon Web Services infrastructure.
 
 This code is an example of how to use AWS distributed infrastructure for running FIJI.
-The configuration of the AWS resources is done using fabric. The worker is written in Python 
+The configuration of the AWS resources is done using boto3 and the awscli. The worker is written in Python 
 and is encapsulated in a docker container. There are four AWS components that are needed to run 
 distributed jobs:
 
@@ -14,7 +14,7 @@ distributed jobs:
 All of them can be managed through the AWS Management Console. However, this code helps to get
 started quickly and run a job autonomously if all the configuration is correct. The code runs a
 script that links all these components and prepares the infrastructure to run a distributed 
-job. When the job is completed, the code is also able to stop resources and clean up components. 
+job. When the job is completed, the code is also able to stop resources and clean up components. It also adds logging and alarms via CloudWatch, helping the user troubleshoot runs and destroy stuck machines.
 
 ## Running the code
 
