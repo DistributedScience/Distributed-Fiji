@@ -35,7 +35,7 @@ After the first script runs successfully, the job can now be submitted to AWS us
  
 Running the script uploads the tasks that are configured in the json file. This assumes that your 
 data is stored in S3, and the json file has the paths to find input and output directories. You have to 
-customize the exampleJob.json file or the run_batch_general file with paths that make sense for your project. 
+customize the exampleJob.json file with paths that make sense for your project. 
 Each job will be run in parallel - you define each task in your input file to guide the parallelization.
 
 ### Step 3
