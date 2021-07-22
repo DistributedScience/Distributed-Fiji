@@ -1,27 +1,27 @@
 # Constants (User configurable)
 
-APP_NAME = 'DistributedFiji'                # Used to generate derivative names unique to the application.
+APP_NAME = 'Distributed-DeepProfiler'                # Used to generate derivative names unique to the application.
 
 # DOCKER REGISTRY INFORMATION:
-DOCKERHUB_TAG = 'cellprofiler/distributed-fiji:latest'
+DOCKERHUB_TAG = 'michaelbornholdt/deep_profiler:v2'
 
 # AWS GENERAL SETTINGS:
 AWS_REGION = 'us-east-1'
 AWS_PROFILE = 'default'                 # The same profile used by your AWS CLI installation
-SSH_KEY_NAME = 'your-key-file.pem'      # Expected to be in ~/.ssh
-AWS_BUCKET = 'your-bucket-name'
+SSH_KEY_NAME = 'jump_mbhornhol.pem'      # Expected to be in ~/.ssh
+AWS_BUCKET = 'imaging-platform'
 
 # EC2 AND ECS INFORMATION:
 ECS_CLUSTER = 'default'
-CLUSTER_MACHINES = 3
+CLUSTER_MACHINES = 136
 TASKS_PER_MACHINE = 1
-MACHINE_TYPE = ['m4.xlarge']
-MACHINE_PRICE = 0.10
-EBS_VOL_SIZE = 30                       # In GB.  Minimum allowed is 22.
+MACHINE_TYPE = ['p2.xlarge']
+MACHINE_PRICE = 0.9
+EBS_VOL_SIZE = 60                     # In GB.  Minimum allowed is 22.
 DOWNLOAD_FILES = 'False'
 
 # DOCKER INSTANCE RUNNING ENVIRONMENT:
-MEMORY = 4096                           # Memory assigned to the docker container in MB
+MEMORY = 6000                           # Memory assigned to the docker container in MB
 SCRIPT_DOWNLOAD_URL = 'https://some/url/with/a/script.y'
 
 # SQS QUEUE INFORMATION:
