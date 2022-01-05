@@ -59,3 +59,5 @@ important to keep this monitor running if you want to automatically shutdown com
 when there are no more tasks in the queue (recommended).
 
 See the wiki for more information about each step of the process.
+
+![DistributedFiji](https://user-images.githubusercontent.com/6721515/148241479-d2601e3b-8c5f-4104-b0b8-446c533408e0.png)
