@@ -58,6 +58,8 @@ The file APP_NAMESpotFleetRequestId.json is created after the cluster is setup i
 important to keep this monitor running if you want to automatically shutdown computing resources
 when there are no more tasks in the queue (recommended).
 
-See the wiki for more information about each step of the process.
+## Documentation
 
-![DistributedFiji](https://user-images.githubusercontent.com/6721515/148241479-d2601e3b-8c5f-4104-b0b8-446c533408e0.png)
+See [our documentation website](https://distributedscience.github.io/Distributed-FIJI) for comprehensive information about each step of the process.
+
+![DistributedFiji](https://user-images.githubusercontent.com/54687786/187791954-97887b19-ff86-4e48-a019-5b93c654dcad.png)
