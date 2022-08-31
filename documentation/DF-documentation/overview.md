@@ -56,15 +56,14 @@ If SQS tells them there are no visible jobs then they shut themselves down.
 
 ## What does this look like?
 
-![Example Instance Configuration](images/sample_DCP_config_1.png)
+![Example Instance Configuration](images/sample_DF_config_1.png)
 
-This is an example of one possible instance configuration using [Distributed-CellProfiler](http://github.com/cellprofiler/distributed-cellprofiler) as an example.
-This is one m4.16xlarge EC2 instance (64 CPUs, 250GB of RAM) with a 165 EBS volume mounted on it. A spot fleet could contain many such instances.
+This is an example of one possible instance configuration of Distributed-FIJI.
+This is one m4.16xlarge EC2 instance (64 CPUs, 250GB of RAM) with a 165 EBS volume mounted on it.
+A spot fleet could contain many such instances.
 It has 16 tasks (individual Docker containers).
 Each Docker container uses 10GB of hard disk space and is assigned 4 CPUs and 15 GB of RAM (which it does not share with other Docker containers).
-Each container shares its individual resources among 4 copies of CellProfiler.
-Each copy of CellProfiler runs a pipeline on one "job", which can be anything from a single image to an entire 384 well plate or timelapse movie.
-You can optionally stagger the start time of these 4 copies of CellProfiler, ensuring that the most memory- or disk-intensive steps aren't happening simultaneously, decreasing the likelihood of a crash.
+Each copy of Fiji runs a pipeline on one "job", which can be anything from a single image to an entire 384 well plate or timelapse movie.
 
 Read more about this and other configurations in [Step 1: Configuration](step_1_configuration.md).
 

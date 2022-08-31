@@ -68,7 +68,7 @@ Do NOT set your SQS_MESSAGE_VISIBILITY very short (e.g. seconds) as if it can ma
 
 ## Example SQS Queue
 
-[[images/Sample_SQS_Queue.png|alt="Sample_SQS_Queue"]]
+![Sample_SQS_Queue](images/Sample_SQS_Queue.png)
 
 This is an example of an SQS Queue.
 You can see that there is one active task with 64 jobs in it.

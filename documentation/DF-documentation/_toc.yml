@@ -15,5 +15,7 @@ parts:
   - file: step_4_monitor
 - caption:
   chapters:
+  - file: advanced_configuration
   - file: troubleshooting_runs
+  - file: AWS_hygiene_scripts
   - file: versions
