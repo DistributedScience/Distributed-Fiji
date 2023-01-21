@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="canonical" href="distributedscience.github.io/AWS_hygiene_scripts.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Versions" href="versions.html" />
-    <link rel="prev" title="Troubleshooting" href="troubleshooting_runs.html" />
+    <link rel="next" title="Troubleshooting" href="troubleshooting_runs.html" />
+    <link rel="prev" title="Advanced Configuration" href="advanced_configuration.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -112,6 +112,23 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
+  FAQ
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="overview_2.html">
+   What happens in AWS when I run Distributed-FIJI?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="costs.html">
+   What does Distributed-Fiji cost?
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
   Running DF
  </span>
 </p>
@@ -156,18 +173,23 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="advanced_configuration.html">
-   Advanced Configuration
+  <a class="reference internal" href="dashboard.html">
+   AWS Cloudwatch Dashboard
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="troubleshooting_runs.html">
-   Troubleshooting
+  <a class="reference internal" href="advanced_configuration.html">
+   Advanced Configuration
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Too many old alarms lying around?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting_runs.html">
+   Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
@@ -442,7 +464,7 @@ title="Print to PDF"
 <section id="too-many-old-empty-log-groups-lying-around">
 <h1>Too many old empty log groups lying around?<a class="headerlink" href="#too-many-old-empty-log-groups-lying-around" title="Permalink to this headline">#</a></h1>
 <p>Bash:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>aws logs describe-log-groups<span class="p">|</span> in2csv -f json --key logGroups &gt; logs.csv
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>aws<span class="w"> </span>logs<span class="w"> </span>describe-log-groups<span class="p">|</span><span class="w"> </span>in2csv<span class="w"> </span>-f<span class="w"> </span>json<span class="w"> </span>--key<span class="w"> </span>logGroups<span class="w"> </span>&gt;<span class="w"> </span>logs.csv
 </pre></div>
 </div>
 <p>R:</p>
@@ -450,23 +472,23 @@ title="Print to PDF"
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
 <span class="nf">library</span><span class="p">(</span><span class="n">readr</span><span class="p">)</span>
 <span class="nf">read_csv</span><span class="p">(</span>
-  <span class="s">&quot;logs.csv&quot;</span><span class="p">,</span>
-  <span class="n">col_types</span> <span class="o">=</span> <span class="nf">cols_only</span><span class="p">(</span>
-    <span class="n">storedBytes</span> <span class="o">=</span> <span class="nf">col_integer</span><span class="p">(),</span>
-    <span class="n">creationTime</span> <span class="o">=</span> <span class="nf">col_double</span><span class="p">(),</span>
-    <span class="n">logGroupName</span> <span class="o">=</span> <span class="nf">col_character</span><span class="p">()</span>
-  <span class="p">)</span>
-<span class="p">)</span> <span class="o">%&gt;%</span>
-  <span class="nf">mutate</span><span class="p">(</span><span class="n">creationTime</span> <span class="o">=</span>
-           <span class="nf">as.POSIXct</span><span class="p">(</span><span class="n">creationTime</span> <span class="o">/</span> <span class="m">1000</span><span class="p">,</span>
-                      <span class="n">origin</span> <span class="o">=</span> <span class="s">&quot;1970-01-01&quot;</span><span class="p">))</span> <span class="o">%&gt;%</span>
-  <span class="nf">filter</span><span class="p">(</span><span class="n">storedBytes</span> <span class="o">==</span> <span class="m">0</span><span class="p">)</span> <span class="o">%&gt;%</span>
-  <span class="nf">select</span><span class="p">(</span><span class="n">logGroupName</span><span class="p">)</span> <span class="o">%&gt;%</span>
-  <span class="nf">write_tsv</span><span class="p">(</span><span class="s">&quot;logs_clear.txt&quot;</span><span class="p">,</span> <span class="n">col_names</span> <span class="o">=</span> <span class="bp">F</span><span class="p">)</span>
+<span class="w">  </span><span class="s">&quot;logs.csv&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">col_types</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">cols_only</span><span class="p">(</span>
+<span class="w">    </span><span class="n">storedBytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">col_integer</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">creationTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">col_double</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">logGroupName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">col_character</span><span class="p">()</span>
+<span class="w">  </span><span class="p">)</span>
+<span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">mutate</span><span class="p">(</span><span class="n">creationTime</span><span class="w"> </span><span class="o">=</span>
+<span class="w">           </span><span class="nf">as.POSIXct</span><span class="p">(</span><span class="n">creationTime</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">1000</span><span class="p">,</span>
+<span class="w">                      </span><span class="n">origin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;1970-01-01&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">storedBytes</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">select</span><span class="p">(</span><span class="n">logGroupName</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span>
+<span class="w">  </span><span class="nf">write_tsv</span><span class="p">(</span><span class="s">&quot;logs_clear.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">col_names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">F</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Bash:</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>parallel aws logs delete-log-group --log-group-name <span class="o">{</span><span class="m">1</span><span class="o">}</span> :::: logs_clear.txt
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>parallel<span class="w"> </span>aws<span class="w"> </span>logs<span class="w"> </span>delete-log-group<span class="w"> </span>--log-group-name<span class="w"> </span><span class="o">{</span><span class="m">1</span><span class="o">}</span><span class="w"> </span>::::<span class="w"> </span>logs_clear.txt
 </pre></div>
 </div>
 </section>
@@ -498,17 +520,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="troubleshooting_runs.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="advanced_configuration.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Troubleshooting</p>
+            <p class="prev-next-title">Advanced Configuration</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="versions.html" title="next page">
+    <a class='right-next' id="next-link" href="troubleshooting_runs.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Versions</p>
+        <p class="prev-next-title">Troubleshooting</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
