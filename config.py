@@ -1,6 +1,7 @@
 # Constants (User configurable)
 
 APP_NAME = 'DistributedFiji'                # Used to generate derivative names unique to the application.
+LOG_GROUP_NAME = APP_NAME 
 
 # DOCKER REGISTRY INFORMATION:
 DOCKERHUB_TAG = 'cellprofiler/distributed-fiji:latest'
@@ -27,10 +28,14 @@ SCRIPT_DOWNLOAD_URL = 'https://some/url/with/a/script.y'
 # SQS QUEUE INFORMATION:
 SQS_QUEUE_NAME = APP_NAME + 'Queue'
 SQS_MESSAGE_VISIBILITY = 1*60           # Timeout (secs) for messages in flight (average time to be processed)
-SQS_DEAD_LETTER_QUEUE = 'arn:aws:sqs:some-region:111111100000:DeadMessages'
+SQS_DEAD_LETTER_QUEUE = 'user_DeadMessages'
 
-# LOG GROUP INFORMATION:
-LOG_GROUP_NAME = APP_NAME 
+# MONITORING
+AUTO_MONITOR = 'True'
+
+# CLOUDWATCH DASHBOARD CREATION
+CREATE_DASHBOARD = 'True'           # Create a dashboard in Cloudwatch for run
+CLEAN_DASHBOARD = 'True'            # Automatically remove dashboard at end of run with Monitor
 
 # REDUNDANCY CHECKS
 EXPECTED_NUMBER_FILES = 7    #What is the number of files that trigger skipping a job?
