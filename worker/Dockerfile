@@ -56,6 +56,8 @@ RUN pip3 install pandas
 # SETUP NEW ENTRYPOINT
 
 WORKDIR /opt/fiji
+RUN Fiji.app/ImageJ-linux64 --update add-update-site "BIG-EPFL" https://sites.imagej.net/BIG-EPFL/
+RUN Fiji.app/ImageJ-linux64 --update add-update-site "MultiStackReg" https://sites.imagej.net/MultiStackReg/
 COPY fiji-worker.py .
 COPY instance-monitor.py .
 COPY run-worker.sh .
